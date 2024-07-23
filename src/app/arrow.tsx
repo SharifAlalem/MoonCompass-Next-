@@ -11,13 +11,14 @@ export default function Arrow({azimuth}:any) {
           console.log(alpha);
           setDeviceOrientation(alpha);
       };
-
-      window.addEventListener('deviceorientation', handleOrientation);
+      window.addEventListener("MozOrientation", handleOrientation, true);
+      window.addEventListener('deviceorientation', handleOrientation, true);
 
       return () => {
           window.removeEventListener('deviceorientation', handleOrientation);
+          window.removeEventListener('MozOrientation', handleOrientation);
       };
-  }, [deviceOrientation]);
+  }, []);
 
   const adjustedAzimuth = (azimuth - deviceOrientation + 360) % 360;
   const rotation = `rotate(${adjustedAzimuth}deg)`;
